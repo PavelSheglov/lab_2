@@ -45,11 +45,11 @@
     <Compile Include="Amphibian.cs" />
     <Compile Include="AmphibianDetachment.cs" />
     <Compile Include="Animal.cs" />
-    <Compile Include="AnimalClass.cs" />
     <Compile Include="Aquarium.cs" />
     <Compile Include="AquariumType.cs" />
     <Compile Include="Aviary.cs" />
     <Compile Include="AviaryStatus.cs" />
+    <Compile Include="AnimalClass.cs" />
     <Compile Include="AviaryType.cs" />
     <Compile Include="Bird.cs" />
     <Compile Include="BirdDetachment.cs" />

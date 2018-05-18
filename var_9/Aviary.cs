@@ -2,20 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace var_9
 {
     public abstract class Aviary : IVerification
     {
         private string _number;
-        private AviaryType _type;
         private AviaryStatus _status;
-        private byte _capacity;//макс.количество особей
+        private byte _capacity;
         private List<Animal> _inhabitants;
 
         public string Number => _number;
-        public AviaryType Type => _type;
         public AviaryStatus Status => _status;
         public byte Capacity
         {
@@ -23,12 +20,10 @@ namespace var_9
             protected set { _capacity = value; }
         }
         public byte FreePlaces => (byte)(_capacity - _inhabitants.Count);
-
-        protected Aviary() { }
-        protected Aviary(AviaryType type)
+                        
+        protected Aviary()
         {
             _number = "";
-            _type = type;
             _status = AviaryStatus.Opened;
             _inhabitants = new List<Animal>();
             _number = SetNumber();
@@ -37,9 +32,10 @@ namespace var_9
         private string SetNumber()
         {
             var temp = new StringBuilder(1000);
-            temp.Append(Type.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString());
-            temp.Append(DateTime.Now.Year.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString());
-            temp.Append(DateTime.Now.Millisecond.ToString());
+            var rnd = new Random();
+
+            temp.Append(this.GetType().Name.ToString() + String.Format("{0:0000}", rnd.Next(100, 2000)));
+            temp.Append(String.Format("{0:00}", rnd.Next(0, 99)));
             return temp.ToString();
         }
         public bool Close()
@@ -62,39 +58,31 @@ namespace var_9
         }
         public virtual bool IsCorrectForSettlement(Animal individual)
         {
-            if (_inhabitants.Count > 0)
+            if (_inhabitants.Count == 0 || 
+                 (_inhabitants.All(i => (i.Family == individual.Family && 
+                                         i.Genus == individual.Genus))))
             {
-                if (_inhabitants.All(i => (i.Family == individual.Family && i.Genus == individual.Genus)))
-                    return true;
-                else
-                    return false;
+                return true;
             }
             else
-                return true;
+                return false;
         }
         public bool SettleAnimal(Animal individual)
         {
             if (IsCorrectForSettlement(individual) && FreePlaces > 0 && Status == AviaryStatus.Opened)
             {
-                individual.AviaryNumber = Number;
                 _inhabitants.Add(individual);
                 return true;
             }
             return false;
         }
-        public Animal FindAnimalById(string id)
+        public Animal FindAnimal(string id)
         {
-            return _inhabitants.Find(f => f.Id == id);
+            return _inhabitants.FirstOrDefault(animal => animal.Id == id);
         }
-        public Animal EvictAnimal(string id)
+        public void EvictAnimal(Animal individual)
         {
-            var evi = FindAnimalById(id);
-            if (evi != null)
-            {
-                _inhabitants.Remove(evi);
-                evi.AviaryNumber = "";
-            }
-            return evi;
+            _inhabitants.Remove(individual);    
         }
         public string GetListOfInhabitants()
         {
@@ -109,8 +97,8 @@ namespace var_9
         public override string ToString()
         {
             var str = new StringBuilder(1000);
-            str.Append("Номер: " + Number + " Тип: " + Type.ToString() + " Статус: " + Status.ToString());
-            str.Append(" Вместимость: " + Capacity.ToString() + " особей, свободно: " + FreePlaces.ToString() + " мест");
+            str.Append("Номер: " + Number + " Тип: " + this.GetType().Name.ToString() + " Статус: " + Status.ToString());
+            str.Append("\n Вместимость: " + Capacity.ToString() + " особей, свободно: " + FreePlaces.ToString() + " мест");
             return str.ToString();
         }
     }

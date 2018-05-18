@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace var_9
+﻿namespace var_9
 {
     public sealed class Aquarium : Aviary
     {
         private AquariumType _aquariumType;
         private double _volume;//в метрах кубических
 
-        public AquariumType AquariumKind => _aquariumType;
+        public AquariumType Kind => _aquariumType;
         public double Volume => _volume;
 
         private Aquarium() : base() { }
-        public Aquarium(AquariumType aquariumType) : base(AviaryType.Aquarium)
+        public Aquarium(AquariumType aquariumType) : base()
         {
             _aquariumType = aquariumType;
             switch (aquariumType)
@@ -30,7 +24,7 @@ namespace var_9
                     break;
             }
         }
-        public Aquarium(AquariumType aquariumType, double volume, byte capacity) : base(AviaryType.Aquarium)
+        public Aquarium(AquariumType aquariumType, double volume, byte capacity) : base()
         {
             _aquariumType = aquariumType;
             _volume = volume;
@@ -39,10 +33,9 @@ namespace var_9
 
         public override bool IsCorrectForSettlement(Animal individual)
         {
-            if (individual is Fish)
-            {
-                if (base.IsCorrectForSettlement(individual))
-                    return true;
+            if (individual is Fish && base.IsCorrectForSettlement(individual))
+            {                
+                return true;
             }
             return false;
         }

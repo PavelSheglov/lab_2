@@ -8,122 +8,98 @@ namespace var_9
 {
     public sealed class Zoo
     {
-        private string _name;
-        private string _address;
         private List<Aviary> _aviaries = new List<Aviary>();
 
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-        public string Address
-        {
-            get { return _address; }
-            set { _address = value; }
-        }
+        public string Name { get; set; }
+        public string Address { get; set; }
 
-        public Zoo()
-        {
-            _name = "Новый Зоопарк";
-            _address = "Индекс, Страна, Город, Улица, Номер";
-        }
+        private Zoo() {}
         public Zoo(string name, string address)
         {
-            _name = name;
-            _address = address;
+            Name = name;
+            Address = address;
         }
 
         public void AddAviary(Aviary aviary)
         {
-            if (aviary != null)
-                _aviaries.Add(aviary);
-
+            _aviaries.Add(aviary);
         }
-        public Aviary FindAviaryByNumber(string number)
+        public Aviary FindAviary(string number)
         {
-            return _aviaries.Find(f => f.Number == number);
+            return _aviaries.FirstOrDefault(aviary => aviary.Number == number);
         }
         public bool DeleteAviary(string number)
         {
-            var del = FindAviaryByNumber(number);
-            if (del != null && del.Status == AviaryStatus.Closed)
+            var aviary = FindAviary(number);
+            if (aviary?.Status == AviaryStatus.Closed)
             {
-                _aviaries.Remove(del);
+                _aviaries.Remove(aviary);
                 return true;
             }
             return false;
         }
         public bool SettleAnimal(Animal animal, Aviary aviary)
         {
-            if (animal != null && aviary != null && aviary.SettleAnimal(animal))
-                return true;
-            return false;
+            return  animal != null &&
+                    aviary != null &&
+                    aviary.SettleAnimal(animal);
         }
-        public Animal FindAnimalbyId(string id)
+        public Animal FindAnimal(string id)
         {
-            Animal res = null;
-            foreach (var i in _aviaries)
-            {
-                var temp = i.FindAnimalById(id);
-                if (temp != null)
-                {
-                    res = temp;
-                    break;
-                }
-            }
-            return res;
+            return _aviaries.Select(aviary => aviary.FindAnimal(id))
+                            .FirstOrDefault(animal => animal != null);
         }
-        public bool TransferAnimal(Animal animal, Aviary sender, Aviary receiver)
+        public bool TransferAnimal(string animalId, Aviary sender, Aviary receiver)
         {
-            if (animal != null && sender != null && receiver != null &&
-               sender.Status != AviaryStatus.Closed && receiver.Status != AviaryStatus.Closed)
+            if (sender.Status != AviaryStatus.Closed && 
+                receiver.Status != AviaryStatus.Closed &&
+                receiver.FreePlaces > 0)
             {
-                if (sender.FindAnimalById(animal.Id) != null && receiver.IsCorrectForSettlement(animal) && receiver.FreePlaces > 0)
+                var animal = sender.FindAnimal(animalId);
+                if (animal != null && receiver.IsCorrectForSettlement(animal))
                 {
-                    receiver.SettleAnimal(sender.EvictAnimal(animal.Id));
-                    return true;
+                    sender.EvictAnimal(animal);
+                    if(receiver.SettleAnimal(animal))
+                    {
+                        return true;
+                    }
+                    sender.SettleAnimal(animal);
                 }
             }
             return false;
         }
-        public Animal EvictAnimal(string id)
+        public void EvictAnimal(string id)
         {
-            var temp = FindAnimalbyId(id);
-            Animal res = null;
-            Aviary aviary = null;
-            if (temp != null)
-                aviary = FindAviaryByNumber(temp.AviaryNumber);
-            if (aviary != null)
-                res = aviary.EvictAnimal(id);
-            return res;
+            var targetAviary = _aviaries.FirstOrDefault(aviary => aviary.FindAnimal(id) != null);
+            var animal = targetAviary?.FindAnimal(id);
+            targetAviary?.EvictAnimal(animal);
         }
-        public string GetListOfAviaries()
+        public StringBuilder GetListOfAviaries()
         {
             var str = new StringBuilder(1000);
-            foreach (var i in _aviaries)
-                str.Append(i.ToString() + "\n");
-            return str.ToString();
+            foreach (var aviary in _aviaries)
+                str.Append(aviary.ToString() + "\n");
+            return str;
         }
-        public string GetDetailInformation()
+        public StringBuilder GetDetailInformation()
         {
             var str = new StringBuilder(10000);
             str.Append("\n-----------ОБЩИЙ ОТЧЕТ ПО ЗООПАРКУ---------------\n");
-            foreach (var i in _aviaries)
+            foreach (var aviary in _aviaries)
             {
                 str.Append("\n------------------------------------------\n");
-                str.Append(i.ToString());
+                str.Append(aviary.ToString());
                 str.Append("\n------------------------------------------\n");
-                str.Append(i.GetListOfInhabitants() + "\n");
+                str.Append(aviary.GetListOfInhabitants() + "\n");
             }
-            return str.ToString();
+            return str;
         }
         public override string ToString()
         {
             var count = 0;
             var str = new StringBuilder(1000);
-            foreach (var i in _aviaries)
-                count += (i.Capacity - i.FreePlaces);
+            foreach (var aviary in _aviaries)
+                count += (aviary.Capacity - aviary.FreePlaces);
             str.Append("Название: " + Name + "\nАдрес: " + Address + "\nКоличество вольеров: " + _aviaries.Count.ToString());
             str.Append(" Общая популяция: " + count.ToString());
             return str.ToString();

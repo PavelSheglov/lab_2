@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace var_9
 {
@@ -13,7 +9,7 @@ namespace var_9
         public ReptileDetachment Detachment => _detachment;
 
         private Reptile() : base() { }
-        public Reptile(ReptileDetachment detachment, string family, string genus, string species) : base(AnimalClass.Reptile, family, genus, species)
+        public Reptile(ReptileDetachment detachment, string family, string genus, string species) : base(family, genus, species)
         {
             _detachment = detachment;
         }

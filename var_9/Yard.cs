@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace var_9
+﻿namespace var_9
 {
     public sealed class Yard : Aviary
     {
         private YardType _yardType;
         private double _square; //квадратных метров
 
-        public YardType YardKind => _yardType;
+        public YardType Kind => _yardType;
         public double Square => _square;
-
+        
         private Yard() : base() { }
-        public Yard(YardType yardType) : base(AviaryType.Yard)
+        public Yard(YardType yardType) : base()
         {
             _yardType = yardType;
             switch (yardType)
@@ -34,25 +28,25 @@ namespace var_9
                     break;
             }
         }
-        public Yard(YardType yardType, double square, byte capacity) : base(AviaryType.Yard)
+        public Yard(YardType yardType, double square, byte capacity) : base()
         {
             _yardType = yardType;
             _square = square;
             this.Capacity = capacity;
         }
-
+                
         public override bool IsCorrectForSettlement(Animal individual)
         {
-            if (((individual is Mammal) &&
+            if ((((individual is Mammal) &&
                  (((Mammal)individual).Detachment == MammalDetachment.Artiodactyla ||
                   ((Mammal)individual).Detachment == MammalDetachment.Perissodactyla ||
                   ((Mammal)individual).Detachment == MammalDetachment.Proboscidea ||
                   ((Mammal)individual).Detachment == MammalDetachment.Carnivora)) ||
-               ((individual is Bird) &&
-                 (((Bird)individual).Detachment == BirdDetachment.Struthioniformes)))
+                ((individual is Bird) &&
+                  (((Bird)individual).Detachment == BirdDetachment.Struthioniformes))) && 
+                base.IsCorrectForSettlement(individual))
             {
-                if (base.IsCorrectForSettlement(individual))
-                    return true;
+                return true;
             }
             return false;
         }
