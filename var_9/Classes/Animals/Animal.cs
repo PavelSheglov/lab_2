@@ -13,7 +13,7 @@ namespace var_9
         public string Id => _id;
         public string Family => _family;
         public string Genus => _genus;
-        public string Name => _species;
+        public string Species => _species;
 
         protected Animal() { }
         protected Animal(string family, string genus, string species)
@@ -41,7 +41,8 @@ namespace var_9
 
         public override string ToString()
         {
-            return "Животное c Id: " + Id;
+            return "Id:" + Id + "\n" +
+                   "Класс:" + this.GetType().Name.ToString() + "\n";
         }
     }
 }

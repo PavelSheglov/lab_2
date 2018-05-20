@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace var_9
 {
@@ -13,7 +11,7 @@ namespace var_9
         public string Name { get; set; }
         public string Address { get; set; }
 
-        private Zoo() {}
+        public Zoo():this("","") {}
         public Zoo(string name, string address)
         {
             Name = name;
@@ -28,6 +26,11 @@ namespace var_9
         {
             return _aviaries.FirstOrDefault(aviary => aviary.Number == number);
         }
+        public bool CloseAviary(string number)
+        {
+            var aviary = FindAviary(number);
+            return aviary != null && aviary.Close();
+        }
         public bool DeleteAviary(string number)
         {
             var aviary = FindAviary(number);
@@ -40,59 +43,64 @@ namespace var_9
         }
         public bool SettleAnimal(Animal animal, Aviary aviary)
         {
-            return  animal != null &&
-                    aviary != null &&
-                    aviary.SettleAnimal(animal);
+            return  aviary.SettleAnimal(animal);
         }
         public Animal FindAnimal(string id)
         {
             return _aviaries.Select(aviary => aviary.FindAnimal(id))
                             .FirstOrDefault(animal => animal != null);
         }
-        public bool TransferAnimal(string animalId, Aviary sender, Aviary receiver)
+        public bool TransferAnimal(Animal animal, Aviary receiver)
         {
-            if (sender.Status != AviaryStatus.Closed && 
+            var sender = _aviaries.FirstOrDefault(aviary => aviary.GetListOfInhabitants().Contains(animal));
+            if (sender!=null && 
                 receiver.Status != AviaryStatus.Closed &&
-                receiver.FreePlaces > 0)
+                receiver.FreePlaces > 0 &&
+                receiver.IsCorrectForSettlement(animal))
             {
-                var animal = sender.FindAnimal(animalId);
-                if (animal != null && receiver.IsCorrectForSettlement(animal))
+                sender.EvictAnimal(animal);
+                if(receiver.SettleAnimal(animal))
                 {
-                    sender.EvictAnimal(animal);
-                    if(receiver.SettleAnimal(animal))
-                    {
-                        return true;
-                    }
-                    sender.SettleAnimal(animal);
+                    return true;
                 }
+                sender.SettleAnimal(animal);
             }
             return false;
         }
-        public void EvictAnimal(string id)
+        public bool EvictAnimal(Animal animal)
         {
-            var targetAviary = _aviaries.FirstOrDefault(aviary => aviary.FindAnimal(id) != null);
-            var animal = targetAviary?.FindAnimal(id);
-            targetAviary?.EvictAnimal(animal);
-        }
-        public StringBuilder GetListOfAviaries()
-        {
-            var str = new StringBuilder(1000);
-            foreach (var aviary in _aviaries)
-                str.Append(aviary.ToString() + "\n");
-            return str;
-        }
-        public StringBuilder GetDetailInformation()
-        {
-            var str = new StringBuilder(10000);
-            str.Append("\n-----------ОБЩИЙ ОТЧЕТ ПО ЗООПАРКУ---------------\n");
-            foreach (var aviary in _aviaries)
+            var targetAviary = _aviaries.FirstOrDefault(aviary => aviary.GetListOfInhabitants().Contains(animal));
+            if (targetAviary != null)
             {
-                str.Append("\n------------------------------------------\n");
-                str.Append(aviary.ToString());
-                str.Append("\n------------------------------------------\n");
-                str.Append(aviary.GetListOfInhabitants() + "\n");
-            }
-            return str;
+               targetAviary.EvictAnimal(animal);
+               return true;
+           }
+           return false;
+        }
+        public List<Aviary> GetListOfAviaries()
+        {
+            return _aviaries;
+        }
+        public List<Aviary> GetListOfAviaries(AviaryType type)
+        {
+            return _aviaries.FindAll(aviary=>aviary.GetType().Name.ToString()==type.ToString());
+        }
+        public List<Animal> GetListOfAnimals()
+        {
+            var animals=new List<Animal>();
+            foreach (var aviary in _aviaries.FindAll(aviary => aviary.FreePlaces > 0))
+                foreach (var animal in aviary.GetListOfInhabitants())
+                    animals.Add(animal);
+            return animals;
+        }
+        public List<Animal> GetListOfAnimals(AnimalClass animalClass)
+        {
+            var animals = new List<Animal>();
+            foreach (var aviary in _aviaries.FindAll(aviary => aviary.FreePlaces > 0))
+                foreach (var animal in aviary.GetListOfInhabitants()
+                                             .FindAll(inhabitant=>inhabitant.GetType().Name.ToString()==animalClass.ToString()))
+                    animals.Add(animal);
+            return animals;
         }
         public override string ToString()
         {
@@ -100,7 +108,8 @@ namespace var_9
             var str = new StringBuilder(1000);
             foreach (var aviary in _aviaries)
                 count += (aviary.Capacity - aviary.FreePlaces);
-            str.Append("Название: " + Name + "\nАдрес: " + Address + "\nКоличество вольеров: " + _aviaries.Count.ToString());
+            str.Append("Название: " + Name + "\nАдрес: " + Address);
+            str.Append("\nКоличество вольеров: " + _aviaries.Count.ToString());
             str.Append(" Общая популяция: " + count.ToString());
             return str.ToString();
         }

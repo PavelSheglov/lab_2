@@ -2,7 +2,7 @@
 {
     public enum MammalDetachment
     {
-        Primates,
+        Primates=1,
         Carnivora,
         Artiodactyla,
         Perissodactyla,

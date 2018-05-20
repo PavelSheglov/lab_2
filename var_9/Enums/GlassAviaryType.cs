@@ -2,7 +2,7 @@
 {
     public enum GlassAviaryType
     {
-        WithWater,
+        WithWater=1,
         WithoutWater
     }
 }

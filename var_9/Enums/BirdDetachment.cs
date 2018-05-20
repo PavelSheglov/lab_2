@@ -2,7 +2,7 @@
 {
     public enum BirdDetachment
     {
-        Passeridae,
+        Passeridae=1,
         Charadriidae,
         Anseriformes,
         Gruiformes,

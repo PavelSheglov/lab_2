@@ -2,7 +2,7 @@
 {
     public enum YardType
     {
-        Plain,
+        Plain=1,
         Rock,
         Forest
     }

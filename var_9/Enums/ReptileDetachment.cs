@@ -2,8 +2,8 @@
 {
     public enum ReptileDetachment
     {
-        Squamata,
+        Squamata=1,
         Testudinata,
-        Crocodylidae
+        Crocodilia
     }
 }

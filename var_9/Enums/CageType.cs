@@ -2,7 +2,7 @@
 {
     public enum CageType
     {
-        WithTrees,
+        WithTrees=1,
         WithWater,
         WithRocks
     }

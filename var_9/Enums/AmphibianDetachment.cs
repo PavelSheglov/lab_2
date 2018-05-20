@@ -2,7 +2,7 @@
 {
     public enum AmphibianDetachment
     {
-        Urodela,
+        Urodela=1,
         Anura
     }
 }

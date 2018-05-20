@@ -2,7 +2,7 @@
 {
     public enum AnimalClass
     {
-        Mammal,
+        Mammal=1,
         Bird,
         Reptile,
         Amphibian,

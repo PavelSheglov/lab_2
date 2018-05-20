@@ -2,13 +2,13 @@
 {
     public enum FishDetachment
     {
-        Perciformes,
+        Perciformes=1,
         Cypriniformes,
         Acipenseriformes,
         Clupeiformes,
         Salmoniformes,
         Pleuronectiformes,
-        Rajidae,
+        Rajiformes,
         Selachimorpha,
         Anguilliformes
     }

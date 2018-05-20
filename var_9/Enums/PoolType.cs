@@ -2,7 +2,7 @@
 {
     public enum PoolType
     {
-        OpenAirPool,
+        OpenAirPool=1,
         IndoorsPool,
         Pond
     }

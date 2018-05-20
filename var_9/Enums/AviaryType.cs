@@ -2,7 +2,7 @@
 {
     public enum AviaryType
     {
-        Cage,
+        Cage=1,
         Yard,
         Pool,
         GlassAviary,

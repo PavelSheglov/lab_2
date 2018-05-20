@@ -52,5 +52,10 @@
             }
             return false;
         }
+        public override string ToString()
+        {
+            return base.ToString() + "\nПлощадь:" + Square + "кв.м." +
+                                     "\nРазновидность:" + Kind.ToString();
+        }
     }
 }

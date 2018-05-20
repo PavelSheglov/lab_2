@@ -19,8 +19,17 @@ namespace var_9
             var str = new StringBuilder(500);
             str.Append(base.GetFullNotation() + " " + Detachment.ToString());
             str.Append(" " + this.Family.ToString());
-            str.Append(" " + this.Name);
+            str.Append(" " + this.Species);
             return str.ToString();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() +
+                   "Отряд:" + Detachment.ToString() + "\n" +
+                   "Семейство:" + Family + "\n" +
+                   "Род:" + Genus +
+                   ", Вид:" + Species;
         }
     }
 }

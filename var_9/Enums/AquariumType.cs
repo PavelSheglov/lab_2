@@ -2,7 +2,7 @@
 {
     public enum AquariumType
     {
-        Freshwater,
+        Freshwater=1,
         SeaWater
     }
 }

@@ -20,10 +20,10 @@ namespace var_9
             protected set { _capacity = value; }
         }
         public byte FreePlaces => (byte)(_capacity - _inhabitants.Count);
-                        
+                                
         protected Aviary()
         {
-            _number = "";
+            //_number = "";
             _status = AviaryStatus.Opened;
             _inhabitants = new List<Animal>();
             _number = SetNumber();
@@ -84,21 +84,15 @@ namespace var_9
         {
             _inhabitants.Remove(individual);    
         }
-        public string GetListOfInhabitants()
+        public List<Animal> GetListOfInhabitants()
         {
-            var str = new StringBuilder(1000);
-            foreach (var i in _inhabitants)
-            {
-                str.Append(i.ToString() + "\n");
-                str.Append(i.GetFullNotation() + "\n");
-            }
-            return str.ToString();
+            return _inhabitants;
         }
         public override string ToString()
         {
             var str = new StringBuilder(1000);
-            str.Append("Номер: " + Number + " Тип: " + this.GetType().Name.ToString() + " Статус: " + Status.ToString());
-            str.Append("\n Вместимость: " + Capacity.ToString() + " особей, свободно: " + FreePlaces.ToString() + " мест");
+            str.Append("Номер:" + Number + " Тип:" + this.GetType().Name.ToString() + " Статус:" + Status.ToString());
+            str.Append("\nВместимость:" + Capacity.ToString() + " особей, свободно:" + FreePlaces.ToString() + " мест");
             return str.ToString();
         }
     }

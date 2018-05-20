@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Animals\Amphibian.cs" />
+    <Compile Include="Classes\Menu.cs" />
     <Compile Include="Enums\AmphibianDetachment.cs" />
     <Compile Include="Classes\Animals\Animal.cs" />
     <Compile Include="Classes\Aviaries\Aquarium.cs" />
