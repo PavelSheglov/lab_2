@@ -23,7 +23,6 @@ namespace var_9
                                 
         protected Aviary()
         {
-            //_number = "";
             _status = AviaryStatus.Opened;
             _inhabitants = new List<Animal>();
             _number = SetNumber();
