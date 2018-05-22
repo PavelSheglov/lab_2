@@ -6,7 +6,7 @@ namespace var_9
 {
     public sealed class Zoo
     {
-        private List<Aviary> _aviaries = new List<Aviary>();
+        private List<Aviary> _aviaries;
 
         public string Name { get; set; }
         public string Address { get; set; }
@@ -16,6 +16,7 @@ namespace var_9
         {
             Name = name;
             Address = address;
+            _aviaries = new List<Aviary>();
         }
 
         public void AddAviary(Aviary aviary)
