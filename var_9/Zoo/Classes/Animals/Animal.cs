@@ -3,7 +3,7 @@ using System.Text;
 
 namespace var_9
 {
-    public abstract class Animal
+    public abstract class Animal:INotation
     {
         private string _family;
         private string _genus;

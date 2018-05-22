@@ -2,7 +2,7 @@
 
 namespace var_9
 {
-    public sealed class Amphibian : Animal
+    public sealed class Amphibian : Animal, INotation
     {
         private AmphibianDetachment _detachment;
 

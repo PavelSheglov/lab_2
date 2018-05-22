@@ -2,7 +2,7 @@
 
 namespace var_9
 {
-    public sealed class Mammal : Animal
+    public sealed class Mammal : Animal, INotation
     {
         private MammalDetachment _detachment;
 
