@@ -1,6 +1,6 @@
 ﻿namespace var_9
 {
-    public sealed class Cage : Aviary
+    public sealed class Cage : Aviary, IVerification
     {
         private CageType _cageType;
         private double _square; //квадратных метров

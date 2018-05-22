@@ -105,6 +105,7 @@ namespace var_9
             Console.WriteLine("------------------------------------------------");
             Console.Write("Ваш выбор:");
         }
+
         private void CreateZoo()
         {
             Console.Clear();
@@ -120,7 +121,6 @@ namespace var_9
             Console.WriteLine("Нажмите любую клавишу для возврата в меню...");
             Console.ReadKey();
         }
-
         private void GenerateZoo()
         {
             _zoo = new Zoo("АО \"Наш новый зоопарк\"", "Россия, г.Н-ск, ул.Новая, 50");
@@ -198,7 +198,6 @@ namespace var_9
             Console.WriteLine("Нажмите любую клавишу для возврата в меню...");
             Console.ReadKey();
         }
-
         private void ChangeZooAddress()
         {
             Console.Clear();
@@ -223,7 +222,6 @@ namespace var_9
             Console.WriteLine("Нажмите любую клавишу для возврата в меню...");
             Console.ReadKey();
         }
-
         private void ShowListOfAviaries()
         {
             Console.Clear();
@@ -238,7 +236,6 @@ namespace var_9
             Console.WriteLine("Нажмите любую клавишу для возврата в меню...");
             Console.ReadKey();
         }
-
         private void ShowListOfAviariesByType()
         {
             Console.Clear();
@@ -283,7 +280,6 @@ namespace var_9
             Console.WriteLine("Нажмите любую клавишу для возврата в меню...");
             Console.ReadKey();
         }
-
         private void ShowListOfAnimals()
         {
             Console.Clear();
@@ -298,7 +294,6 @@ namespace var_9
             Console.WriteLine("Нажмите любую клавишу для возврата в меню...");
             Console.ReadKey();
         }
-
         private void ShowListOfAnimalsByClass()
         {
             Console.Clear();
@@ -343,7 +338,6 @@ namespace var_9
             Console.WriteLine("Нажмите любую клавишу для возврата в меню...");
             Console.ReadKey();
         }
-
         private void ShowInhabitantsOfAviary()
         {
             Console.Clear();

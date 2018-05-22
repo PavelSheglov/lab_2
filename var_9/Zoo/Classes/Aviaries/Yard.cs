@@ -1,6 +1,6 @@
 ﻿namespace var_9
 {
-    public sealed class Yard : Aviary
+    public sealed class Yard : Aviary, IVerification
     {
         private YardType _yardType;
         private double _square; //квадратных метров

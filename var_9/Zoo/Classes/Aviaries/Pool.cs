@@ -1,6 +1,6 @@
 ﻿namespace var_9
 {
-    public sealed class Pool : Aviary
+    public sealed class Pool : Aviary, IVerification
     {
         private PoolType _poolType;
         private double _square; //квадратных метров

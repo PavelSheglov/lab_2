@@ -1,6 +1,6 @@
 ﻿namespace var_9
 {
-    public sealed class Aquarium : Aviary
+    public sealed class Aquarium : Aviary, IVerification
     {
         private AquariumType _aquariumType;
         private double _volume;//в метрах кубических
