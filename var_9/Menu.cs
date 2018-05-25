@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using var_9.Zoopark.Classes;
+using var_9.Zoopark.Classes.Animals;
+using var_9.Zoopark.Classes.Aviaries;
+using var_9.Zoopark.Enums.Aviaries;
+using var_9.Zoopark.Enums.Animals;
 
 namespace var_9
 {
