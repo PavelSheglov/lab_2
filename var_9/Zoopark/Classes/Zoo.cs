@@ -36,6 +36,11 @@ namespace var_9.Zoopark.Classes
             var aviary = FindAviary(number);
             return aviary != null && aviary.Close();
         }
+        public bool OpenAviary(string number)
+        {
+            var aviary = FindAviary(number);
+            return aviary != null && aviary.Open();
+        }
         public bool DeleteAviary(string number)
         {
             var aviary = FindAviary(number);

@@ -4,7 +4,7 @@ using var_9.Zoopark.Interfaces;
 
 namespace var_9.Zoopark.Classes.Animals
 {
-    public abstract class Animal:INotation
+    public abstract class Animal:INotation // интерфейс оставить только для базового класса
     {
         private string _family;
         private string _genus;
@@ -27,6 +27,7 @@ namespace var_9.Zoopark.Classes.Animals
 
         private string GenerateId()
         {
+            System.Threading.Thread.Sleep(10);
             var temp = new StringBuilder(1000);
             var rnd = new Random();
 
@@ -35,12 +36,12 @@ namespace var_9.Zoopark.Classes.Animals
             return temp.ToString();
         }
 
-        public virtual string GetFullNotation()
+        public virtual string GetFullNotation()//добавить строковое представление отряда или генерик, а из каждого отряда этот метод удалить
         {
             return this.GetType().Name.ToString();
         }
 
-        public override string ToString()
+        public override string ToString() //здесь сделать полную информацию, а из классов отрядов удалить этот метод
         {
             return "Id:" + Id + "\n" +
                    "Класс:" + this.GetType().Name.ToString() + "\n";

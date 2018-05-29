@@ -33,6 +33,7 @@ namespace var_9.Zoopark.Classes.Aviaries
 
         private string SetNumber()
         {
+            System.Threading.Thread.Sleep(10);
             var temp = new StringBuilder(1000);
             var rnd = new Random();
 
@@ -58,11 +59,13 @@ namespace var_9.Zoopark.Classes.Aviaries
             }
             return false;
         }
-        public virtual bool IsCorrectForSettlement(Animal individual)
+        public virtual bool IsCorrectForSettlement(Animal individual)//поставить условие совпадения класса и отряда
         {
             if (_inhabitants.Count == 0 || 
-                 (_inhabitants.All(i => (i.Family == individual.Family && 
-                                         i.Genus == individual.Genus))))
+                 (_inhabitants.All(inhabitant => 
+                           (inhabitant.GetType().Name.ToString() == individual.GetType().Name.ToString() && 
+                            inhabitant.Family == individual.Family && 
+                            inhabitant.Genus == individual.Genus))))
             {
                 return true;
             }

@@ -20,9 +20,10 @@ namespace var_9.Zoopark.Classes.Animals
         public override string GetFullNotation()
         {
             var str = new StringBuilder(500);
-            str.Append(base.GetFullNotation() + " " + Detachment.ToString());
-            str.Append(" " + this.Family.ToString());
-            str.Append(" " + this.Species);
+            str.Append(base.GetFullNotation() + "*" + Detachment.ToString());
+            str.Append("*" + this.Family.ToString());
+            str.Append("*" + this.Genus.ToString());
+            str.Append("*" + this.Species);
             return str.ToString();
         }
 
