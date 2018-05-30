@@ -19,6 +19,25 @@ namespace UnitTests.Animals
             Assert.AreEqual("Карповые", animal.Family);
             Assert.AreEqual("Карпы", animal.Genus);
             Assert.AreEqual("Сазан", animal.Species);
+
+            try
+            {
+                var animal2 = new Fish(FishDetachment.Anguilliformes, "", "", "");
+                Assert.Fail();
+            }
+            catch (Exception) { }
+            try
+            {
+                var animal3 = new Fish(FishDetachment.Anguilliformes, " ", " ", " ");
+                Assert.Fail();
+            }
+            catch (Exception) { }
+            try
+            {
+                var animal4 = new Fish(FishDetachment.Anguilliformes, "dfd", " ", "");
+                Assert.Fail();
+            }
+            catch (Exception) { }
         }
         [TestMethod]
         public void TestGetFullNotation()

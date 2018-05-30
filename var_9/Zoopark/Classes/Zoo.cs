@@ -43,23 +43,50 @@ namespace var_9.Zoopark.Classes
         }
         public bool CloseAviary(string number)
         {
-            var aviary = FindAviary(number);
-            return aviary != null && aviary.Close();
+            try
+            {
+                var aviary = FindAviary(number);
+                if (aviary == null)
+                    throw new ArgumentException("Вольер с указанным номером в зоопарке отсутствует!!!");
+                return aviary.Close();
+            }
+            catch(ArgumentException)
+            {
+                throw;
+            }
         }
         public bool OpenAviary(string number)
         {
-            var aviary = FindAviary(number);
-            return aviary != null && aviary.Open();
+            try
+            {
+                var aviary = FindAviary(number);
+                if (aviary == null)
+                    throw new ArgumentException("Вольер с указанным номером в зоопарке отсутствует!!!");
+                return aviary.Open();
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
         }
         public bool DeleteAviary(string number)
         {
-            var aviary = FindAviary(number);
-            if (aviary?.Status == AviaryStatus.Closed)
+            try
             {
-                _aviaries.Remove(aviary);
-                return true;
+                var aviary = FindAviary(number);
+                if (aviary == null)
+                    throw new ArgumentException("Вольер с указанным номером в зоопарке отсутствует!!!");
+                if (aviary.Status == AviaryStatus.Closed)
+                {
+                    _aviaries.Remove(aviary);
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (ArgumentException)
+            {
+                throw;
+            }
         }
         public bool SettleAnimal(Animal animal, Aviary aviary)
         {
@@ -67,7 +94,9 @@ namespace var_9.Zoopark.Classes
             {
                 if (animal == null || aviary == null)
                     throw new ArgumentException("Пустая ссылка на животное и/или вольер!!!");
-                return FindAviary(aviary.Number) != null && aviary.SettleAnimal(animal);
+                if(FindAviary(aviary.Number) == null)
+                    throw new ArgumentException("Вольер назначения в зоопарке отсутствует!!!");
+                return aviary.SettleAnimal(animal);
             }
             catch(ArgumentException)
             {
@@ -86,8 +115,11 @@ namespace var_9.Zoopark.Classes
                 if(animal == null || receiver == null)
                     throw new ArgumentException("Пустая ссылка на животное и/или вольер!!!");
                 var sender = _aviaries.FirstOrDefault(aviary => aviary.GetListOfInhabitants().Contains(animal));
-                if (sender != null &&
-                    receiver.Status != AviaryStatus.Closed &&
+                if(sender==null)
+                    throw new ArgumentException("Животное в зоопарке отсутствует!!!");
+                if(FindAviary(receiver.Number) == null)
+                    throw new ArgumentException("Вольер назначения в зоопарке отсутствует!!!");
+                if (receiver.Status != AviaryStatus.Closed &&
                     receiver.FreePlaces > 0 &&
                     receiver.IsCorrectForSettlement(animal))
                 {
@@ -105,20 +137,16 @@ namespace var_9.Zoopark.Classes
                 throw;
             }
         }
-        public bool EvictAnimal(Animal animal)
+        public void EvictAnimal(Animal animal)
         {
-
             try
             {
                 if (animal == null)
                     throw new ArgumentException("Пустая ссылка на животное!!!");
                 var targetAviary = _aviaries.FirstOrDefault(aviary => aviary.GetListOfInhabitants().Contains(animal));
-                if (targetAviary != null)
-                {
-                    targetAviary.EvictAnimal(animal);
-                    return true;
-                }
-                return false;
+                if (targetAviary == null)
+                    throw new ArgumentException("Данное животное в зоопарке отсутствует!!!");
+                targetAviary.EvictAnimal(animal);
             }
             catch (ArgumentException)
             {

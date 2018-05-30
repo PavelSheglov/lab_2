@@ -19,6 +19,25 @@ namespace UnitTests.Animals
             Assert.AreEqual("Аллигаторовые", animal.Family);
             Assert.AreEqual("Черные каманы", animal.Genus);
             Assert.AreEqual("Черный кайман", animal.Species);
+
+            try
+            {
+                var animal2 = new Reptile(ReptileDetachment.Crocodilia, "", "", "");
+                Assert.Fail();
+            }
+            catch (Exception) { }
+            try
+            {
+                var animal3 = new Reptile(ReptileDetachment.Crocodilia, " ", " ", " ");
+                Assert.Fail();
+            }
+            catch (Exception) { }
+            try
+            {
+                var animal4 = new Reptile(ReptileDetachment.Crocodilia, "dfd", " ", "");
+                Assert.Fail();
+            }
+            catch (Exception) { }
         }
         [TestMethod]
         public void TestGetFullNotation()

@@ -19,6 +19,25 @@ namespace UnitTests.Animals
             Assert.AreEqual("Зайцевые", animal.Family);
             Assert.AreEqual("Зайцы", animal.Genus);
             Assert.AreEqual("Арктический беляк", animal.Species);
+
+            try
+            {
+                var animal2 = new Mammal(MammalDetachment.Artiodactyla, "", "", "");
+                Assert.Fail();
+            }
+            catch (Exception) { }
+            try
+            {
+                var animal3 = new Mammal(MammalDetachment.Artiodactyla, " ", " ", " ");
+                Assert.Fail();
+            }
+            catch (Exception) { }
+            try
+            {
+                var animal4 = new Mammal(MammalDetachment.Artiodactyla, "dfd", " ", "");
+                Assert.Fail();
+            }
+            catch (Exception) { }
         }
         [TestMethod]
         public void TestGetFullNotation()

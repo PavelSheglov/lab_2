@@ -65,15 +65,18 @@ namespace var_9
                         CloseAviary();
                         break;
                     case "14":
-                        DeleteAviary();
+                        OpenAviary();
                         break;
                     case "15":
-                        EvictAnimal();
+                        DeleteAviary();
                         break;
                     case "16":
-                        TransferAnimal();
+                        EvictAnimal();
                         break;
                     case "17":
+                        TransferAnimal();
+                        break;
+                    case "18":
                         exit = true;
                         break;
                     default:
@@ -99,10 +102,11 @@ namespace var_9
             Console.WriteLine("11. Добавить новый вольер");
             Console.WriteLine("12. Поселить новое животное в любой подходящий вольер");
             Console.WriteLine("13. Найти и закрыть вольер по номеру");
-            Console.WriteLine("14. Найти и удалить вольер по номеру");
-            Console.WriteLine("15. Найти и выселить животное по ID");
-            Console.WriteLine("16. Переселить животное с заданным ID в другой вольер с заданным номером");
-            Console.WriteLine("17. Выход");
+            Console.WriteLine("14. Найти и открыть вольер по номеру");
+            Console.WriteLine("15. Найти и удалить вольер по номеру");
+            Console.WriteLine("16. Найти и выселить животное по ID");
+            Console.WriteLine("17. Переселить животное с заданным ID в другой вольер с заданным номером");
+            Console.WriteLine("18. Выход");
             Console.WriteLine("------------------------------------------------");
             Console.Write("Ваш выбор:");
         }
@@ -288,7 +292,8 @@ namespace var_9
             Console.WriteLine("------------------------------------------------");
             foreach (var animal in _zoo.GetListOfAnimals())
             {
-                Console.WriteLine(animal.ToString());
+                Console.WriteLine(animal.Id);
+                Console.WriteLine(animal.GetFullNotation());
                 Console.WriteLine("------------------------------------------------");
             }
             Console.WriteLine("------------------------------------------------");
@@ -332,7 +337,8 @@ namespace var_9
             Console.WriteLine("------------------------------------------------");
             foreach (var animal in _zoo.GetListOfAnimals(animalClass))
             {
-                Console.WriteLine(animal.ToString());
+                Console.WriteLine(animal.Id);
+                Console.WriteLine(animal.GetFullNotation());
                 Console.WriteLine("------------------------------------------------");
             }
             Console.WriteLine("------------------------------------------------");
@@ -353,7 +359,8 @@ namespace var_9
                 Console.WriteLine("------------------------------------------------");
                 foreach (var animal in aviary.GetListOfInhabitants())
                 {
-                    Console.WriteLine(animal.ToString());
+                    Console.WriteLine(animal.Id);
+                    Console.WriteLine(animal.GetFullNotation());
                     Console.WriteLine("------------------------------------------------");
                 }
             }
@@ -923,10 +930,40 @@ namespace var_9
             Console.Clear();
             Console.Write("Введите номер вольера:");
             var number = Console.ReadLine();
-            if (_zoo.CloseAviary(number))
-                Console.WriteLine("Вольер с номером {0} успешно закрыт", number);
-            else
-                Console.WriteLine("Вольер с номером {0} не существует или\nне может быть закрыт (например, занят)", number);
+            try
+            {
+                if (_zoo.CloseAviary(number))
+                    Console.WriteLine("Вольер с номером {0} успешно закрыт", number);
+                else
+                    Console.WriteLine("Вольер с номером {0} не может быть закрыт (например, занят или уже закрыт)", number);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Вольер с номером {0} не существует", number);
+            }
+            Console.WriteLine("------------------------------------------------");
+            Console.WriteLine("Нажмите любую клавишу для возврата в меню...");
+            Console.ReadKey();
+        }
+
+        private void OpenAviary()
+        {
+            Console.Clear();
+            Console.Write("Введите номер вольера:");
+            var number = Console.ReadLine();
+            try
+            {
+                if (_zoo.OpenAviary(number))
+                    Console.WriteLine("Вольер с номером {0} успешно открыт", number);
+                else
+                    Console.WriteLine("Вольер с номером {0} не может быть открыт (например, уже открыт)", number);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Вольер с номером {0} не существует", number);
+            }
             Console.WriteLine("------------------------------------------------");
             Console.WriteLine("Нажмите любую клавишу для возврата в меню...");
             Console.ReadKey();
@@ -937,10 +974,18 @@ namespace var_9
             Console.Clear();
             Console.Write("Введите номер вольера:");
             var number = Console.ReadLine();
-            if (_zoo.DeleteAviary(number))
-                Console.WriteLine("Вольер с номером {0} успешно удален", number);
-            else
-                Console.WriteLine("Вольер с номером {0} не существует или\nне может быть удален (например, занят или не закрыт)", number);
+            try
+            {
+                if (_zoo.DeleteAviary(number))
+                    Console.WriteLine("Вольер с номером {0} успешно удален", number);
+                else
+                    Console.WriteLine("Вольер с номером {0} не может быть удален (например, занят или не закрыт)", number);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Вольер с номером {0} не существует", number);
+            }
             Console.WriteLine("------------------------------------------------");
             Console.WriteLine("Нажмите любую клавишу для возврата в меню...");
             Console.ReadKey();
@@ -953,8 +998,8 @@ namespace var_9
             var id = Console.ReadLine();
             try
             {
-                if (_zoo.EvictAnimal(_zoo.FindAnimal(id)))
-                    Console.WriteLine("Животное с ID {0} успешно выселено", id);
+                _zoo.EvictAnimal(_zoo.FindAnimal(id));
+                Console.WriteLine("Животное с ID {0} успешно выселено", id);
             }
             catch(Exception ex)
             {

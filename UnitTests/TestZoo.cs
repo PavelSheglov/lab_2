@@ -62,6 +62,13 @@ namespace UnitTests
             zoo.AddAviary(aviary);
 
             Assert.AreEqual(1, zoo.GetListOfAviaries().Count);
+                        
+            try
+            {
+                zoo.AddAviary(null);
+                Assert.Fail();
+            }
+            catch (Exception) { }
         }
         [TestMethod]
         public void TestFindAviary()
@@ -81,7 +88,12 @@ namespace UnitTests
             zoo.AddAviary(aviary);
 
             Assert.AreEqual(true, zoo.CloseAviary(aviary.Number));
-            Assert.AreEqual(false, zoo.CloseAviary("any number"));
+            try
+            {
+                zoo.CloseAviary("any number");
+                Assert.Fail();
+            }
+            catch (Exception) { }
             Assert.AreEqual(false, zoo.CloseAviary(aviary.Number));
         }
         [TestMethod]
@@ -93,7 +105,12 @@ namespace UnitTests
             zoo.CloseAviary(aviary.Number);
 
             Assert.AreEqual(true, zoo.OpenAviary(aviary.Number));
-            Assert.AreEqual(false, zoo.OpenAviary("any number"));
+            try
+            {
+                zoo.OpenAviary("any number");
+                Assert.Fail();
+            }
+            catch (Exception) { }
             Assert.AreEqual(false, zoo.OpenAviary(aviary.Number));
         }
         [TestMethod]
@@ -107,8 +124,18 @@ namespace UnitTests
             zoo.CloseAviary(aviary.Number);
 
             Assert.AreEqual(true, zoo.DeleteAviary(aviary.Number));
-            Assert.AreEqual(false, zoo.DeleteAviary("any number"));
-            Assert.AreEqual(false, zoo.DeleteAviary(aviary.Number));
+            try
+            {
+                zoo.DeleteAviary("any number");
+                Assert.Fail();
+            }
+            catch (Exception) { }
+            try
+            {
+                zoo.DeleteAviary(aviary.Number);
+                Assert.Fail();
+            }
+            catch (Exception) { }
             Assert.AreEqual(false, zoo.DeleteAviary(aviary2.Number));
         }
         [TestMethod]
@@ -126,6 +153,22 @@ namespace UnitTests
             Assert.AreEqual(true, zoo.SettleAnimal(animal2, zoo.FindAviary(aviary.Number)));
             Assert.AreEqual(false, zoo.SettleAnimal(animal3, zoo.FindAviary(aviary.Number)));
             Assert.AreEqual(false, zoo.SettleAnimal(animal4, zoo.FindAviary(aviary.Number)));
+            try
+            {
+                zoo.SettleAnimal(null, zoo.FindAviary(aviary.Number));
+            }
+            catch (Exception) { }
+            try
+            {
+                zoo.SettleAnimal(animal, null);
+            }
+            catch (Exception) { }
+            try
+            {
+                zoo.SettleAnimal(animal, new Cage(CageType.WithRocks, 10, 2));
+            }
+            catch (Exception) { }
+
         }
         [TestMethod]
         public void TestFindAnimal()
@@ -163,8 +206,37 @@ namespace UnitTests
 
             Assert.AreEqual(true, zoo.TransferAnimal(zoo.FindAnimal(animal1.Id), zoo.FindAviary(aviary2.Number)));
             Assert.AreEqual(false, zoo.TransferAnimal(zoo.FindAnimal(animal1.Id), zoo.FindAviary(aviary3.Number)));
-            Assert.AreEqual(false, zoo.TransferAnimal(zoo.FindAnimal(animal2.Id), zoo.FindAviary(aviary1.Number)));
+
+            try
+            {
+                zoo.TransferAnimal(zoo.FindAnimal(animal2.Id), zoo.FindAviary(aviary1.Number));
+                Assert.Fail();
+            }
+            catch (Exception) { }
+
+            try
+            {
+                zoo.TransferAnimal(animal2, zoo.FindAviary(aviary1.Number));
+                Assert.Fail();
+            }
+            catch (Exception) { }
+
             zoo.SettleAnimal(animal2, aviary1);
+            var aviary4 = new Pool(PoolType.IndoorsPool);
+            try
+            {
+                zoo.TransferAnimal(zoo.FindAnimal(animal2.Id), zoo.FindAviary(aviary4.Number));
+                Assert.Fail();
+            }
+            catch (Exception) { }
+
+            try
+            {
+                zoo.TransferAnimal(zoo.FindAnimal(animal2.Id), aviary4);
+                Assert.Fail();
+            }
+            catch (Exception) { }
+
             Assert.AreEqual(false, zoo.TransferAnimal(zoo.FindAnimal(animal2.Id), zoo.FindAviary(aviary2.Number)));
             zoo.EvictAnimal(animal1);
             zoo.CloseAviary(aviary2.Number);
@@ -179,9 +251,20 @@ namespace UnitTests
 
             zoo.AddAviary(aviary1);
             zoo.SettleAnimal(animal1, aviary1);
-            
-            Assert.AreEqual(true, zoo.EvictAnimal(animal1));
-            Assert.AreEqual(false, zoo.EvictAnimal(animal1));
+            zoo.EvictAnimal(animal1);
+            Assert.AreEqual(0, zoo.GetListOfAnimals().Count);
+            try
+            {
+                zoo.EvictAnimal(null);
+                Assert.Fail();
+            }
+            catch (Exception) { }
+            try
+            {
+                zoo.EvictAnimal(animal1);
+                Assert.Fail();
+            }
+            catch (Exception) { }
         }
         [TestMethod]
         public void TestGetFullListOfAviaries()

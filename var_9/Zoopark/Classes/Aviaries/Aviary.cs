@@ -110,6 +110,8 @@ namespace var_9.Zoopark.Classes.Aviaries
             {
                 if (individual == null)
                     throw new ArgumentException("Пустая ссылка на животное!!!");
+                if(FindAnimal(individual.Id)==null)
+                    throw new ArgumentException("Животное отсутствует в вольере!!!");
                 _inhabitants.Remove(individual);
             }
             catch (ArgumentException)

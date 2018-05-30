@@ -19,6 +19,25 @@ namespace UnitTests.Animals
             Assert.AreEqual("Саламандровые", animal.Family);
             Assert.AreEqual("Малые тритоны", animal.Genus);
             Assert.AreEqual("Обыкновенный тритон", animal.Species);
+
+            try
+            {
+                var animal2 = new Amphibian(AmphibianDetachment.Anura, "", "", "");
+                Assert.Fail();
+            }
+            catch (Exception) { }
+            try
+            {
+                var animal3 = new Amphibian(AmphibianDetachment.Anura, " ", " ", " ");
+                Assert.Fail();
+            }
+            catch (Exception) { }
+            try
+            {
+                var animal4 = new Amphibian(AmphibianDetachment.Anura, "dfd", " ", "");
+                Assert.Fail();
+            }
+            catch (Exception) { }
         }
         [TestMethod]
         public void TestGetFullNotation()

@@ -34,6 +34,12 @@ namespace UnitTests.Aviaries
             Assert.AreEqual(3, aviary.FreePlaces);
             Assert.AreEqual(YardType.Plain, aviary.Kind);
             Assert.AreEqual(1000, aviary.Square);
+            try
+            {
+                var aviary2 = new Yard(YardType.Plain, -1, 0);
+                Assert.Fail();
+            }
+            catch (Exception) { }
         }
         [TestMethod]
         public void TestCloseAviary()
@@ -88,6 +94,12 @@ namespace UnitTests.Aviaries
 
             aviary.SettleAnimal(animal1);
             Assert.AreEqual(false, aviary.IsCorrectForSettlement(animal4));
+            try
+            {
+                aviary.IsCorrectForSettlement(null);
+                Assert.Fail();
+            }
+            catch (Exception) { }
         }
         [TestMethod]
         public void TestSettleAnimal()
@@ -112,6 +124,11 @@ namespace UnitTests.Aviaries
             aviary.Close();
 
             Assert.AreEqual(false, aviary.SettleAnimal(animal4));
+            try
+            {
+                aviary.SettleAnimal(null);
+            }
+            catch (Exception) { }
         }
         [TestMethod]
         public void TestFindAnimal()
@@ -133,8 +150,16 @@ namespace UnitTests.Aviaries
             aviary.EvictAnimal(animal1);
 
             Assert.AreEqual(0, aviary.GetListOfInhabitants().Count);
-
-            aviary.EvictAnimal(animal1);
+            try
+            {
+                aviary.EvictAnimal(null);
+            }
+            catch (Exception) { }
+            try
+            {
+                aviary.EvictAnimal(animal1);
+            }
+            catch (Exception) { }
         }
         [TestMethod]
         public void TestGetListOfInhabitants()
