@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using var_9.Zoopark.Classes.Animals;
@@ -25,7 +26,16 @@ namespace var_9.Zoopark.Classes
 
         public void AddAviary(Aviary aviary)
         {
-            _aviaries.Add(aviary);
+            try
+            {
+                if (aviary == null)
+                    throw new ArgumentException("Пустая ссылка на вольер!!!");
+                _aviaries.Add(aviary);
+            }
+            catch(ArgumentException)
+            {
+                throw;
+            }
         }
         public Aviary FindAviary(string number)
         {
@@ -53,7 +63,16 @@ namespace var_9.Zoopark.Classes
         }
         public bool SettleAnimal(Animal animal, Aviary aviary)
         {
-            return  aviary.SettleAnimal(animal);
+            try
+            {
+                if (animal == null || aviary == null)
+                    throw new ArgumentException("Пустая ссылка на животное и/или вольер!!!");
+                return FindAviary(aviary.Number) != null && aviary.SettleAnimal(animal);
+            }
+            catch(ArgumentException)
+            {
+                throw;
+            }
         }
         public Animal FindAnimal(string id)
         {
@@ -62,30 +81,49 @@ namespace var_9.Zoopark.Classes
         }
         public bool TransferAnimal(Animal animal, Aviary receiver)
         {
-            var sender = _aviaries.FirstOrDefault(aviary => aviary.GetListOfInhabitants().Contains(animal));
-            if (sender!=null && 
-                receiver.Status != AviaryStatus.Closed &&
-                receiver.FreePlaces > 0 &&
-                receiver.IsCorrectForSettlement(animal))
+            try
             {
-                sender.EvictAnimal(animal);
-                if(receiver.SettleAnimal(animal))
+                if(animal == null || receiver == null)
+                    throw new ArgumentException("Пустая ссылка на животное и/или вольер!!!");
+                var sender = _aviaries.FirstOrDefault(aviary => aviary.GetListOfInhabitants().Contains(animal));
+                if (sender != null &&
+                    receiver.Status != AviaryStatus.Closed &&
+                    receiver.FreePlaces > 0 &&
+                    receiver.IsCorrectForSettlement(animal))
                 {
-                    return true;
+                    sender.EvictAnimal(animal);
+                    if (receiver.SettleAnimal(animal))
+                    {
+                        return true;
+                    }
+                    sender.SettleAnimal(animal);
                 }
-                sender.SettleAnimal(animal);
+                return false;
             }
-            return false;
+            catch(ArgumentException)
+            {
+                throw;
+            }
         }
         public bool EvictAnimal(Animal animal)
         {
-            var targetAviary = _aviaries.FirstOrDefault(aviary => aviary.GetListOfInhabitants().Contains(animal));
-            if (targetAviary != null)
+
+            try
             {
-               targetAviary.EvictAnimal(animal);
-               return true;
-           }
-           return false;
+                if (animal == null)
+                    throw new ArgumentException("Пустая ссылка на животное!!!");
+                var targetAviary = _aviaries.FirstOrDefault(aviary => aviary.GetListOfInhabitants().Contains(animal));
+                if (targetAviary != null)
+                {
+                    targetAviary.EvictAnimal(animal);
+                    return true;
+                }
+                return false;
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
         }
         public List<Aviary> GetListOfAviaries()
         {

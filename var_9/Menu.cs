@@ -157,13 +157,13 @@ namespace var_9
             System.Threading.Thread.Sleep(20);
             aviary4.SettleAnimal(new Bird(BirdDetachment.Anseriformes, "Утиные", "Лебеди", "Лебедь-трубач"));
             System.Threading.Thread.Sleep(20);
-            aviary5.SettleAnimal(new Fish(FishDetachment.Salmoniformes, "Лососевые", "Лососи", "Лосось атлантический"));
+            aviary5.SettleAnimal(new Fish(FishDetachment.Salmoniformes, "Лососёвые", "Лососи", "Лосось атлантический"));
             System.Threading.Thread.Sleep(20);
-            aviary5.SettleAnimal(new Fish(FishDetachment.Salmoniformes, "Лососевые", "Лососи", "Лосось атлантический"));
+            aviary5.SettleAnimal(new Fish(FishDetachment.Salmoniformes, "Лососёвые", "Лососи", "Лосось атлантический"));
             System.Threading.Thread.Sleep(20);
-            aviary5.SettleAnimal(new Fish(FishDetachment.Salmoniformes, "Лососевые", "Лососи", "Лосось атлантический"));
+            aviary5.SettleAnimal(new Fish(FishDetachment.Salmoniformes, "Лососёвые", "Лососи", "Лосось атлантический"));
             System.Threading.Thread.Sleep(20);
-            aviary5.SettleAnimal(new Fish(FishDetachment.Salmoniformes, "Лососевые", "Лососи", "Кумжа"));
+            aviary5.SettleAnimal(new Fish(FishDetachment.Salmoniformes, "Лососёвые", "Лососи", "Кумжа"));
             System.Threading.Thread.Sleep(20);
             aviary5.SettleAnimal(new Amphibian(AmphibianDetachment.Urodela, "Саламандровые", "Малые тритоны", "Обыкновенный тритон"));
             System.Threading.Thread.Sleep(20);
@@ -426,27 +426,21 @@ namespace var_9
                     type = CageType.WithRocks;
                     break;
             }
-            double square = 0.00;
-            byte capacity = (byte)0;
+            
             try
             {
                 Console.Write("Введите площадь (кв.м):");
-                square = Convert.ToDouble(Console.ReadLine());
+                double square = Convert.ToDouble(Console.ReadLine());
                 Console.Write("Введите емкость (кол-во особей):");
-                capacity = Convert.ToByte(Console.ReadLine());
-                if (square <= 0 || capacity == 0)
-                    throw new FormatException();
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Были введены неверные данные, будут использованы значения по умолчанию");
-                square = 0.00;
-                capacity = (byte)0;
-            }
-            if (square > 0 && capacity > 0)
+                byte capacity = Convert.ToByte(Console.ReadLine());
                 return new Cage(type, square, capacity);
-            else
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Были введены неверные данные, поэтому будут использованы значения по умолчанию");
                 return new Cage(type);
+            }
         }
         private Yard CreateYard()
         {
@@ -471,27 +465,20 @@ namespace var_9
                     type = YardType.Forest;
                     break;
             }
-            double square = 0.00;
-            byte capacity = (byte)0;
             try
             {
                 Console.Write("Введите площадь (кв.м):");
-                square = Convert.ToDouble(Console.ReadLine());
+                double square = Convert.ToDouble(Console.ReadLine());
                 Console.Write("Введите емкость (кол-во особей):");
-                capacity = Convert.ToByte(Console.ReadLine());
-                if (square <= 0 || capacity == 0)
-                    throw new FormatException();
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Были введены неверные данные, будут использованы значения по умолчанию");
-                square = 0.00;
-                capacity = (byte)0;
-            }
-            if (square > 0 && capacity > 0)
+                byte capacity = Convert.ToByte(Console.ReadLine());
                 return new Yard(type, square, capacity);
-            else
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Были введены неверные данные, поэтому будут использованы значения по умолчанию");
                 return new Yard(type);
+            }
         }
         private Pool CreatePool()
         {
@@ -516,27 +503,20 @@ namespace var_9
                     type = PoolType.Pond;
                     break;
             }
-            double square = 0.00;
-            byte capacity = (byte)0;
             try
             {
                 Console.Write("Введите площадь (кв.м):");
-                square = Convert.ToDouble(Console.ReadLine());
+                double square = Convert.ToDouble(Console.ReadLine());
                 Console.Write("Введите емкость (кол-во особей):");
-                capacity = Convert.ToByte(Console.ReadLine());
-                if (square <= 0 || capacity == 0)
-                    throw new FormatException();
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Были введены неверные данные, будут использованы значения по умолчанию");
-                square = 0.00;
-                capacity = (byte)0;
-            }
-            if (square > 0 && capacity > 0)
+                byte capacity = Convert.ToByte(Console.ReadLine());
                 return new Pool(type, square, capacity);
-            else
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Были введены неверные данные, поэтому будут использованы значения по умолчанию");
                 return new Pool(type);
+            }
         }
         private Aquarium CreateAquarium()
         {
@@ -557,27 +537,20 @@ namespace var_9
                     type = AquariumType.SeaWater;
                     break;
             }
-            double volume = 0.00;
-            byte capacity = (byte)0;
             try
             {
                 Console.Write("Введите объем (куб.м):");
-                volume = Convert.ToDouble(Console.ReadLine());
+                double volume = Convert.ToDouble(Console.ReadLine());
                 Console.Write("Введите емкость (кол-во особей):");
-                capacity = Convert.ToByte(Console.ReadLine());
-                if (volume <= 0 || capacity == 0)
-                    throw new FormatException();
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Были введены неверные данные, будут использованы значения по умолчанию");
-                volume = 0.00;
-                capacity = (byte)0;
-            }
-            if (volume > 0 && capacity > 0)
+                byte capacity = Convert.ToByte(Console.ReadLine());
                 return new Aquarium(type, volume, capacity);
-            else
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Были введены неверные данные, поэтому будут использованы значения по умолчанию");
                 return new Aquarium(type);
+            }      
         }
         private GlassAviary CreateGlassAviary()
         {
@@ -598,33 +571,26 @@ namespace var_9
                     type = GlassAviaryType.WithoutWater;
                     break;
             }
-            double volume = 0.00;
-            byte capacity = (byte)0;
             try
             {
                 Console.Write("Введите объем (куб.м):");
-                volume = Convert.ToDouble(Console.ReadLine());
+                double volume = Convert.ToDouble(Console.ReadLine());
                 Console.Write("Введите емкость (кол-во особей):");
-                capacity = Convert.ToByte(Console.ReadLine());
-                if (volume <= 0 || capacity == 0)
-                    throw new FormatException();
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Были введены неверные данные, будут использованы значения по умолчанию");
-                volume = 0.00;
-                capacity = (byte)0;
-            }
-            if (volume > 0 && capacity > 0)
+                byte capacity = Convert.ToByte(Console.ReadLine());
                 return new GlassAviary(type, volume, capacity);
-            else
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Были введены неверные данные, поэтому будут использованы значения по умолчанию");
                 return new GlassAviary(type);
+            }        
         }
 
         private void SettleAnimal()
         {
             Console.Clear();
-            Console.WriteLine("Выберите класс животного");
+            Console.WriteLine("Выберите класс добавляемого животного");
             Console.WriteLine("------------------------------------------------");
             Console.WriteLine("1. {0} (Млекопитающие) - (по умолчанию)", AnimalClass.Mammal.ToString());
             Console.WriteLine("2. {0} (Птицы)", AnimalClass.Bird.ToString());
@@ -726,17 +692,23 @@ namespace var_9
                     detachment = MammalDetachment.Proboscidea;
                     break;
             }
-            string family;
-            string genus;
-            string species;
-            Console.Write("Введите название семейства:");
-            family = Console.ReadLine();
-            Console.Write("Введите название рода:");
-            genus = Console.ReadLine();
-            Console.Write("Введите название вида:");
-            species = Console.ReadLine();
-            return new Mammal(detachment, family, genus, species);
-        }
+            try
+            {
+                 Console.Write("Введите название семейства:");
+                 var family = Console.ReadLine();
+                 Console.Write("Введите название рода:");
+                 var genus = Console.ReadLine();
+                 Console.Write("Введите название вида:");
+                 var species = Console.ReadLine();
+                 return new Mammal(detachment, family, genus, species);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Были введены неверные данные, поэтому будет создано животное по умолчанию");
+                return new Mammal(MammalDetachment.Primates, "Гоминиды", "Шимпанзе", "Обыкновенный шимпанзе");
+            }
+        }     
         private Bird CreateBird()
         {
             Console.WriteLine("Выберите отряд птиц");
@@ -788,16 +760,22 @@ namespace var_9
                     detachment = BirdDetachment.Strigiformes;
                     break;
             }
-            string family;
-            string genus;
-            string species;
-            Console.Write("Введите название семейства:");
-            family = Console.ReadLine();
-            Console.Write("Введите название рода:");
-            genus = Console.ReadLine();
-            Console.Write("Введите название вида:");
-            species = Console.ReadLine();
-            return new Bird(detachment, family, genus, species);
+            try
+            {
+                Console.Write("Введите название семейства:");
+                var family = Console.ReadLine();
+                Console.Write("Введите название рода:");
+                var genus = Console.ReadLine();
+                Console.Write("Введите название вида:");
+                var species = Console.ReadLine();
+                return new Bird(detachment, family, genus, species);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Были введены неверные данные, поэтому будет создано животное по умолчанию");
+                return new Bird(BirdDetachment.Passeridae, "Врановые", "Вороны", "Обыкновенный ворон");
+            }
         }
         private Reptile CreateReptile()
         {
@@ -822,16 +800,22 @@ namespace var_9
                     detachment = ReptileDetachment.Crocodilia;
                     break;
             }
-            string family;
-            string genus;
-            string species;
-            Console.Write("Введите название семейства:");
-            family = Console.ReadLine();
-            Console.Write("Введите название рода:");
-            genus = Console.ReadLine();
-            Console.Write("Введите название вида:");
-            species = Console.ReadLine();
-            return new Reptile(detachment, family, genus, species);
+            try
+            {
+                Console.Write("Введите название семейства:");
+                var family = Console.ReadLine();
+                Console.Write("Введите название рода:");
+                var genus = Console.ReadLine();
+                Console.Write("Введите название вида:");
+                var species = Console.ReadLine();
+                return new Reptile(detachment, family, genus, species);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Были введены неверные данные, поэтому будет создано животное по умолчанию");
+                return new Reptile(ReptileDetachment.Testudinata, "Сухопутные черепахи", "Американские сухопутные черепахи", "Слоновая черепаха");
+            }
         }
         private Amphibian CreateAmphibian()
         {
@@ -852,16 +836,22 @@ namespace var_9
                     detachment = AmphibianDetachment.Anura;
                     break;
             }
-            string family;
-            string genus;
-            string species;
-            Console.Write("Введите название семейства:");
-            family = Console.ReadLine();
-            Console.Write("Введите название рода:");
-            genus = Console.ReadLine();
-            Console.Write("Введите название вида:");
-            species = Console.ReadLine();
-            return new Amphibian(detachment, family, genus, species);
+            try
+            {
+                Console.Write("Введите название семейства:");
+                var family = Console.ReadLine();
+                Console.Write("Введите название рода:");
+                var genus = Console.ReadLine();
+                Console.Write("Введите название вида:");
+                var species = Console.ReadLine();
+                return new Amphibian(detachment, family, genus, species);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Были введены неверные данные, поэтому будет создано животное по умолчанию");
+                return new Amphibian(AmphibianDetachment.Urodela, "Саламандровые", "Малые тритоны", "Обыкновенный тритон");
+            }
         }
         private Fish CreateFish()
         {
@@ -910,16 +900,22 @@ namespace var_9
                     detachment = FishDetachment.Anguilliformes;
                     break;
             }
-            string family;
-            string genus;
-            string species;
-            Console.Write("Введите название семейства:");
-            family = Console.ReadLine();
-            Console.Write("Введите название рода:");
-            genus = Console.ReadLine();
-            Console.Write("Введите название вида:");
-            species = Console.ReadLine();
-            return new Fish(detachment, family, genus, species);
+            try
+            {
+                Console.Write("Введите название семейства:");
+                var family = Console.ReadLine();
+                Console.Write("Введите название рода:");
+                var genus = Console.ReadLine();
+                Console.Write("Введите название вида:");
+                var species = Console.ReadLine();
+                return new Fish(detachment, family, genus, species);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Были введены неверные данные, поэтому будет создано животное по умолчанию");
+                return new Fish(FishDetachment.Salmoniformes, "Лососёвые", "Лососи", "Атлантический лосось");
+            }
         }
 
         private void CloseAviary()
@@ -955,11 +951,16 @@ namespace var_9
             Console.Clear();
             Console.Write("Введите Id животного:");
             var id = Console.ReadLine();
-            var animal = _zoo.FindAnimal(id);
-            if (animal!=null && _zoo.EvictAnimal(animal))
-                Console.WriteLine("Животное с ID {0} успешно выселено", id);
-            else
+            try
+            {
+                if (_zoo.EvictAnimal(_zoo.FindAnimal(id)))
+                    Console.WriteLine("Животное с ID {0} успешно выселено", id);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
                 Console.WriteLine("Животное с ID {0} не существует в зоопарке\nи не может быть выселено", id);
+            }
             Console.WriteLine("------------------------------------------------");
             Console.WriteLine("Нажмите любую клавишу для возврата в меню...");
             Console.ReadKey();
@@ -970,20 +971,20 @@ namespace var_9
             Console.Clear();
             Console.Write("Введите Id животного:");
             var id = Console.ReadLine();
-            var animal = _zoo.FindAnimal(id);
             Console.Write("Введите номер вольера, в который переселить животное:");
             var number = Console.ReadLine();
-            var aviary = _zoo.FindAviary(number);
-            if(animal!=null && aviary!=null)
+            try
             {
-                if (_zoo.TransferAnimal(animal, aviary))
+                if (_zoo.TransferAnimal(_zoo.FindAnimal(id), _zoo.FindAviary(number)))
                     Console.WriteLine("Животное с ID {0} успешно переселено\nв вольер с номером {1}", id, number);
                 else
                     Console.WriteLine("Животное с ID {0} не может быть переселено\nв вольер с номером {1} (занят/не подходит)", id, number);
             }
-            else
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
                 Console.WriteLine("Животное с ID {0} и/или вольер с номером {1} не существует в зоопарке", id, number);
-
+            }
             Console.WriteLine("------------------------------------------------");
             Console.WriteLine("Нажмите любую клавишу для возврата в меню...");
             Console.ReadKey();

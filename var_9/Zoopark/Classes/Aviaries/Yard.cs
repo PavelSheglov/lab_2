@@ -1,4 +1,5 @@
-﻿using var_9.Zoopark.Classes.Animals;
+﻿using System;
+using var_9.Zoopark.Classes.Animals;
 using var_9.Zoopark.Enums.Animals;
 using var_9.Zoopark.Enums.Aviaries;
 using var_9.Zoopark.Interfaces;
@@ -35,25 +36,43 @@ namespace var_9.Zoopark.Classes.Aviaries
         }
         public Yard(YardType yardType, double square, byte capacity) : base()
         {
-            _yardType = yardType;
-            _square = square;
-            this.Capacity = capacity;
+            try
+            {
+                if (square <= 0 || capacity == 0)
+                    throw new ArgumentException("Недопустимые значения площади и/или емкости!!!");
+                _yardType = yardType;
+                _square = square;
+                this.Capacity = capacity;
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
         }
                 
         public override bool IsCorrectForSettlement(Animal individual)
         {
-            if ((((individual is Mammal) &&
-                 (((Mammal)individual).Detachment == MammalDetachment.Artiodactyla ||
-                  ((Mammal)individual).Detachment == MammalDetachment.Perissodactyla ||
-                  ((Mammal)individual).Detachment == MammalDetachment.Proboscidea ||
-                  ((Mammal)individual).Detachment == MammalDetachment.Carnivora)) ||
-                ((individual is Bird) &&
-                  (((Bird)individual).Detachment == BirdDetachment.Struthioniformes))) && 
-                base.IsCorrectForSettlement(individual))
+            try
             {
-                return true;
+                if (individual == null)
+                    throw new ArgumentException("Пустая ссылка на животное!!!");
+                if ((((individual is Mammal) &&
+                     (((Mammal)individual).Detachment == MammalDetachment.Artiodactyla ||
+                      ((Mammal)individual).Detachment == MammalDetachment.Perissodactyla ||
+                      ((Mammal)individual).Detachment == MammalDetachment.Proboscidea ||
+                      ((Mammal)individual).Detachment == MammalDetachment.Carnivora)) ||
+                    ((individual is Bird) &&
+                      (((Bird)individual).Detachment == BirdDetachment.Struthioniformes))) &&
+                    base.IsCorrectForSettlement(individual))
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (ArgumentException)
+            {
+                throw;
+            }
         }
         public override string ToString()
         {

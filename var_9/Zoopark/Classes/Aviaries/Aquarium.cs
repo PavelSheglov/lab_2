@@ -1,4 +1,5 @@
-﻿using var_9.Zoopark.Classes.Animals;
+﻿using System;
+using var_9.Zoopark.Classes.Animals;
 using var_9.Zoopark.Enums.Animals;
 using var_9.Zoopark.Enums.Aviaries;
 using var_9.Zoopark.Interfaces;
@@ -31,18 +32,36 @@ namespace var_9.Zoopark.Classes.Aviaries
         }
         public Aquarium(AquariumType aquariumType, double volume, byte capacity) : base()
         {
-            _aquariumType = aquariumType;
-            _volume = volume;
-            this.Capacity = capacity;
+            try
+            {
+                if (volume <= 0 || capacity == 0)
+                    throw new ArgumentException("Недопустимые значения объема и/или емкости!!!");
+                _aquariumType = aquariumType;
+                _volume = volume;
+                this.Capacity = capacity;
+            }
+            catch(ArgumentException)
+            {
+                throw;
+            }
         }
 
         public override bool IsCorrectForSettlement(Animal individual)
         {
-            if (individual is Fish && base.IsCorrectForSettlement(individual))
-            {                
-                return true;
+            try
+            {
+                if (individual == null)
+                    throw new ArgumentException("Пустая ссылка на животное!!!");
+                if (individual is Fish && base.IsCorrectForSettlement(individual))
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch(ArgumentException)
+            {
+                throw;
+            }
         }
         public override string ToString()
         {

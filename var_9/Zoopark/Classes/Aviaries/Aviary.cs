@@ -59,27 +59,46 @@ namespace var_9.Zoopark.Classes.Aviaries
             }
             return false;
         }
-        public virtual bool IsCorrectForSettlement(Animal individual)//поставить условие совпадения класса и отряда
+        public virtual bool IsCorrectForSettlement(Animal individual)
         {
-            if (_inhabitants.Count == 0 || 
-                 (_inhabitants.All(inhabitant => 
-                           (inhabitant.GetType().Name.ToString() == individual.GetType().Name.ToString() && 
-                            inhabitant.Family == individual.Family && 
-                            inhabitant.Genus == individual.Genus))))
+            try
             {
-                return true;
+                if (individual == null)
+                    throw new ArgumentException("Пустая ссылка на животное!!!");
+                if (_inhabitants.Count == 0 ||
+                   (_inhabitants.All(inhabitant =>
+                             (inhabitant.GetType().Name.ToString() == individual.GetType().Name.ToString() &&
+                              inhabitant.DetachmentName == individual.DetachmentName &&
+                              inhabitant.Family == individual.Family &&
+                              inhabitant.Genus == individual.Genus))))
+                {
+                    return true;
+                }
+                else
+                    return false;
             }
-            else
-                return false;
+            catch (ArgumentException)
+            {
+                throw;
+            }
         }
         public bool SettleAnimal(Animal individual)
         {
-            if (IsCorrectForSettlement(individual) && FreePlaces > 0 && Status == AviaryStatus.Opened)
+            try
             {
-                _inhabitants.Add(individual);
-                return true;
+                if (individual == null)
+                    throw new ArgumentException("Пустая ссылка на животное!!!");
+                if (IsCorrectForSettlement(individual) && FreePlaces > 0 && Status == AviaryStatus.Opened)
+                {
+                    _inhabitants.Add(individual);
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (ArgumentException)
+            {
+                throw;
+            }
         }
         public Animal FindAnimal(string id)
         {
@@ -87,7 +106,16 @@ namespace var_9.Zoopark.Classes.Aviaries
         }
         public void EvictAnimal(Animal individual)
         {
-            _inhabitants.Remove(individual);    
+            try
+            {
+                if (individual == null)
+                    throw new ArgumentException("Пустая ссылка на животное!!!");
+                _inhabitants.Remove(individual);
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
         }
         public List<Animal> GetListOfInhabitants()
         {

@@ -1,4 +1,5 @@
-﻿using var_9.Zoopark.Classes.Animals;
+﻿using System;
+using var_9.Zoopark.Classes.Animals;
 using var_9.Zoopark.Enums.Animals;
 using var_9.Zoopark.Enums.Aviaries;
 using var_9.Zoopark.Interfaces;
@@ -35,27 +36,45 @@ namespace var_9.Zoopark.Classes.Aviaries
         }
         public Pool(PoolType poolType, double square, byte capacity) : base()
         {
-            _poolType = poolType;
-            _square = square;
-            this.Capacity = capacity;
+            try
+            {
+                if (square <= 0 || capacity == 0)
+                    throw new ArgumentException("Недопустимые значения площади и/или емкости!!!");
+                _poolType = poolType;
+                _square = square;
+                this.Capacity = capacity;
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
         }
 
         public override bool IsCorrectForSettlement(Animal individual)
         {
-            if ((((individual is Mammal) &&
-                   (((Mammal)individual).Detachment == MammalDetachment.Pinnipedia ||
-                    ((Mammal)individual).Detachment == MammalDetachment.Carnivora ||
-                    ((Mammal)individual).Detachment == MammalDetachment.Perissodactyla ||
-                    ((Mammal)individual).Detachment == MammalDetachment.Cetacea ||
-                    ((Mammal)individual).Detachment == MammalDetachment.Rodentia)) ||
-                 ((individual is Bird) &&
-                   (((Bird)individual).Detachment == BirdDetachment.Anseriformes ||
-                    ((Bird)individual).Detachment == BirdDetachment.Sphenisciformes))) && 
-                 base.IsCorrectForSettlement(individual))
+            try
             {
-                return true;
+                if (individual == null)
+                    throw new ArgumentException("Пустая ссылка на животное!!!");
+                if ((((individual is Mammal) &&
+                       (((Mammal)individual).Detachment == MammalDetachment.Pinnipedia ||
+                        ((Mammal)individual).Detachment == MammalDetachment.Carnivora ||
+                        ((Mammal)individual).Detachment == MammalDetachment.Perissodactyla ||
+                        ((Mammal)individual).Detachment == MammalDetachment.Cetacea ||
+                        ((Mammal)individual).Detachment == MammalDetachment.Rodentia)) ||
+                     ((individual is Bird) &&
+                       (((Bird)individual).Detachment == BirdDetachment.Anseriformes ||
+                        ((Bird)individual).Detachment == BirdDetachment.Sphenisciformes))) &&
+                     base.IsCorrectForSettlement(individual))
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (ArgumentException)
+            {
+                throw;
+            }
         }
         public override string ToString()
         {
