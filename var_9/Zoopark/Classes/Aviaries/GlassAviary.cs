@@ -6,6 +6,7 @@ using var_9.Zoopark.Interfaces;
 
 namespace var_9.Zoopark.Classes.Aviaries
 {
+    [Serializable]
     public sealed class GlassAviary : Aviary, IVerification
     {
         private GlassAviaryType _glassAviaryType;
@@ -69,7 +70,7 @@ namespace var_9.Zoopark.Classes.Aviaries
         }
         public override string ToString()
         {
-            return base.ToString() + "\nОбъем:" + Volume + "куб.м." +
+            return base.ToString() + "\nОбъем:" + Volume + " куб.м." +
                                      "\nРазновидность:" + Kind.ToString();
         }
     }

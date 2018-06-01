@@ -6,6 +6,7 @@ using var_9.Zoopark.Interfaces;
 
 namespace var_9.Zoopark.Classes.Aviaries
 {
+    [Serializable]
     public sealed class Yard : Aviary, IVerification
     {
         private YardType _yardType;
@@ -76,7 +77,7 @@ namespace var_9.Zoopark.Classes.Aviaries
         }
         public override string ToString()
         {
-            return base.ToString() + "\nПлощадь:" + Square + "кв.м." +
+            return base.ToString() + "\nПлощадь:" + Square + " кв.м." +
                                      "\nРазновидность:" + Kind.ToString();
         }
     }

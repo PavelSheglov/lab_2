@@ -73,6 +73,7 @@
     <Compile Include="Zoopark\Classes\Aviaries\Yard.cs" />
     <Compile Include="Zoopark\Enums\Aviaries\YardType.cs" />
     <Compile Include="Zoopark\Classes\Zoo.cs" />
+    <Compile Include="ZooSerialiser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

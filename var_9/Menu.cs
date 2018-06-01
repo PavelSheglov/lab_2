@@ -77,6 +77,12 @@ namespace var_9
                         TransferAnimal();
                         break;
                     case "18":
+                        SerializeZoo();
+                        break;
+                    case "19":
+                        DeserializeZoo();
+                        break;
+                    case "20":
                         exit = true;
                         break;
                     default:
@@ -106,7 +112,9 @@ namespace var_9
             Console.WriteLine("15. Найти и удалить вольер по номеру");
             Console.WriteLine("16. Найти и выселить животное по ID");
             Console.WriteLine("17. Переселить животное с заданным ID в другой вольер с заданным номером");
-            Console.WriteLine("18. Выход");
+            Console.WriteLine("18. Сериализовать зоопарк");
+            Console.WriteLine("19. Десериализовать зоопарк");
+            Console.WriteLine("20. Выход");
             Console.WriteLine("------------------------------------------------");
             Console.Write("Ваш выбор:");
         }
@@ -1030,6 +1038,33 @@ namespace var_9
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("Животное с ID {0} и/или вольер с номером {1} не существует в зоопарке", id, number);
             }
+            Console.WriteLine("------------------------------------------------");
+            Console.WriteLine("Нажмите любую клавишу для возврата в меню...");
+            Console.ReadKey();
+        }
+
+        private void SerializeZoo()
+        {
+            Console.Clear();
+            var serializer = new ZooSerializer();
+            if (_zoo != null && serializer.SerializeZoo(_zoo))
+                Console.WriteLine("Зоопарк успешно сериализован в файл {0}", serializer.FileName);
+            else
+                Console.WriteLine("Зоопарк не был сериализован");
+            Console.WriteLine("------------------------------------------------");
+            Console.WriteLine("Нажмите любую клавишу для возврата в меню...");
+            Console.ReadKey();
+        }
+
+        private void DeserializeZoo()
+        {
+            Console.Clear();
+            var serializer = new ZooSerializer();
+            _zoo = serializer.DeserializeZoo();
+            if (_zoo != null)
+                Console.WriteLine("Зоопарк успешно десериализован из файла {0}", serializer.FileName);
+            else
+                Console.WriteLine("Зоопарк не был десериализован");
             Console.WriteLine("------------------------------------------------");
             Console.WriteLine("Нажмите любую клавишу для возврата в меню...");
             Console.ReadKey();

@@ -8,6 +8,7 @@ using var_9.Zoopark.Interfaces;
 
 namespace var_9.Zoopark.Classes.Aviaries
 {
+    [Serializable]
     public abstract class Aviary : IVerification
     {
         private string _number;
@@ -36,7 +37,7 @@ namespace var_9.Zoopark.Classes.Aviaries
             System.Threading.Thread.Sleep(10);
             var temp = new StringBuilder(1000);
             var rnd = new Random();
-
+            System.Threading.Thread.Sleep(10);
             temp.Append(this.GetType().Name.ToString() + String.Format("{0:0000}", rnd.Next(100, 2000)));
             temp.Append(String.Format("{0:00}", rnd.Next(0, 99)));
             return temp.ToString();

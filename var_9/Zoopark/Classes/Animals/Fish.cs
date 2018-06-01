@@ -4,6 +4,7 @@ using var_9.Zoopark.Enums.Animals;
 
 namespace var_9.Zoopark.Classes.Animals
 {
+    [Serializable]
     public sealed class Fish : Animal
     {
         private FishDetachment _detachment;

@@ -9,6 +9,7 @@ using var_9.Zoopark.Enums.Aviaries;
 
 namespace var_9.Zoopark.Classes
 {
+    [Serializable]
     public sealed class Zoo
     {
         private List<Aviary> _aviaries;
@@ -180,13 +181,10 @@ namespace var_9.Zoopark.Classes
         }
         public override string ToString()
         {
-            var count = 0;
             var str = new StringBuilder(1000);
-            foreach (var aviary in _aviaries)
-                count += (aviary.Capacity - aviary.FreePlaces);
             str.Append("Название: " + Name + "\nАдрес: " + Address);
             str.Append("\nКоличество вольеров: " + _aviaries.Count.ToString());
-            str.Append(" Общая популяция: " + count.ToString());
+            str.Append(" Общая популяция: " + GetListOfAnimals().Count.ToString());
             return str.ToString();
         }
     }
