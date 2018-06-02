@@ -8,7 +8,6 @@ using var_9.Zoopark.Interfaces;
 
 namespace var_9.Zoopark.Classes.Aviaries
 {
-    //[Serializable]
     public abstract class Aviary : IVerification
     {
         private string _number;

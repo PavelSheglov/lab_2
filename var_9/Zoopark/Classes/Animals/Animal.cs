@@ -4,7 +4,6 @@ using var_9.Zoopark.Interfaces;
 
 namespace var_9.Zoopark.Classes.Animals
 {
-    //[Serializable]
     public abstract class Animal:INotation
     {
         private string _family;

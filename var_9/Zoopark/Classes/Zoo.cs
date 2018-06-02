@@ -9,7 +9,6 @@ using var_9.Zoopark.Enums.Aviaries;
 
 namespace var_9.Zoopark.Classes
 {
-    //[Serializable]
     public sealed class Zoo
     {
         private List<Aviary> _aviaries;

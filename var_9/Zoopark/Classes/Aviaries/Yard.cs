@@ -6,7 +6,6 @@ using var_9.Zoopark.Interfaces;
 
 namespace var_9.Zoopark.Classes.Aviaries
 {
-    //[Serializable]
     public sealed class Yard : Aviary, IVerification
     {
         private YardType _yardType;
