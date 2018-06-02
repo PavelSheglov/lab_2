@@ -1,5 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Zoo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Name>АО "Наш новый зоопарк"</Name>
-  <Address>Россия, г.Н-ск, ул.Новая, 50</Address>
-</Zoo>
+<ZooDTO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Aviaries>
+    <AviaryDTO xsi:type="CageDTO">
+      <Inhabitants>
+        <AnimalDTO xsi:type="MammalDTO">
+          <Family>family1</Family>
+          <Genus>genus1</Genus>
+          <Species>species1</Species>
+          <Detachment>Carnivora</Detachment>
+        </AnimalDTO>
+      </Inhabitants>
+      <Status>Opened</Status>
+      <Capacity>5</Capacity>
+      <Kind>WithRocks</Kind>
+      <Square>15</Square>
+    </AviaryDTO>
+    <AviaryDTO xsi:type="PoolDTO">
+      <Inhabitants>
+        <AnimalDTO xsi:type="BirdDTO">
+          <Family>family2</Family>
+          <Genus>genus2</Genus>
+          <Species>species2</Species>
+          <Detachment>Anseriformes</Detachment>
+        </AnimalDTO>
+      </Inhabitants>
+      <Status>Opened</Status>
+      <Capacity>5</Capacity>
+      <Kind>IndoorsPool</Kind>
+      <Square>15</Square>
+    </AviaryDTO>
+    <AviaryDTO xsi:type="YardDTO">
+      <Inhabitants>
+        <AnimalDTO xsi:type="MammalDTO">
+          <Family>family3</Family>
+          <Genus>genus3</Genus>
+          <Species>species3</Species>
+          <Detachment>Artiodactyla</Detachment>
+        </AnimalDTO>
+      </Inhabitants>
+      <Status>Opened</Status>
+      <Capacity>10</Capacity>
+      <Kind>Plain</Kind>
+      <Square>2000</Square>
+    </AviaryDTO>
+  </Aviaries>
+  <Name>name</Name>
+  <Address>address</Address>
+</ZooDTO>

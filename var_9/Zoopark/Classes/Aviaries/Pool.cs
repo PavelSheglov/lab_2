@@ -6,7 +6,7 @@ using var_9.Zoopark.Interfaces;
 
 namespace var_9.Zoopark.Classes.Aviaries
 {
-    [Serializable]
+    //[Serializable]
     public sealed class Pool : Aviary, IVerification
     {
         private PoolType _poolType;

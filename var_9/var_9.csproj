@@ -42,6 +42,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Serializer\DTOClasses\Animals\AmphibianDTO.cs" />
+    <Compile Include="Serializer\DTOClasses\Animals\AnimalDTO.cs" />
+    <Compile Include="Serializer\DTOClasses\Animals\BirdDTO.cs" />
+    <Compile Include="Serializer\DTOClasses\Animals\FishDTO.cs" />
+    <Compile Include="Serializer\DTOClasses\Animals\MammalDTO.cs" />
+    <Compile Include="Serializer\DTOClasses\Animals\ReptileDTO.cs" />
+    <Compile Include="Serializer\DTOClasses\Aviaries\AquariumDTO.cs" />
+    <Compile Include="Serializer\DTOClasses\Aviaries\AviaryDTO.cs" />
+    <Compile Include="Serializer\DTOClasses\Aviaries\CageDTO.cs" />
+    <Compile Include="Serializer\DTOClasses\Aviaries\GlassAviaryDTO.cs" />
+    <Compile Include="Serializer\DTOClasses\Aviaries\PoolDTO.cs" />
+    <Compile Include="Serializer\DTOClasses\Aviaries\YardDTO.cs" />
+    <Compile Include="Serializer\DTOClasses\ZooDTO.cs" />
+    <Compile Include="Serializer\DTOConverters\Animals\AmphibianConverter.cs" />
+    <Compile Include="Serializer\DTOConverters\Animals\AnimalConverter.cs" />
+    <Compile Include="Serializer\DTOConverters\Animals\BirdConverter.cs" />
+    <Compile Include="Serializer\DTOConverters\Animals\FishConverter.cs" />
+    <Compile Include="Serializer\DTOConverters\Animals\MammalConverter.cs" />
+    <Compile Include="Serializer\DTOConverters\Animals\ReptileConverter.cs" />
+    <Compile Include="Serializer\DTOConverters\Aviaries\AquariumConverter.cs" />
+    <Compile Include="Serializer\DTOConverters\Aviaries\AviaryConverter.cs" />
+    <Compile Include="Serializer\DTOConverters\Aviaries\CageConverter.cs" />
+    <Compile Include="Serializer\DTOConverters\Aviaries\GlassAviaryConverter.cs" />
+    <Compile Include="Serializer\DTOConverters\Aviaries\PoolConverter.cs" />
+    <Compile Include="Serializer\DTOConverters\Aviaries\YardConverter.cs" />
+    <Compile Include="Serializer\DTOConverters\ZooConverter.cs" />
+    <Compile Include="Serializer\DTOInterfaces\IAnimalConverter.cs" />
+    <Compile Include="Serializer\DTOInterfaces\IAviaryConverter.cs" />
+    <Compile Include="Serializer\DTOInterfaces\IZooConverter.cs" />
     <Compile Include="Zoopark\Interfaces\INotation.cs" />
     <Compile Include="Zoopark\Classes\Animals\Amphibian.cs" />
     <Compile Include="Menu.cs" />
@@ -73,7 +102,7 @@
     <Compile Include="Zoopark\Classes\Aviaries\Yard.cs" />
     <Compile Include="Zoopark\Enums\Aviaries\YardType.cs" />
     <Compile Include="Zoopark\Classes\Zoo.cs" />
-    <Compile Include="ZooSerialiser.cs" />
+    <Compile Include="Serializer\ZooSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

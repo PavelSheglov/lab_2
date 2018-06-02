@@ -4,6 +4,7 @@ using var_9.Zoopark.Classes.Animals;
 using var_9.Zoopark.Classes.Aviaries;
 using var_9.Zoopark.Enums.Aviaries;
 using var_9.Zoopark.Enums.Animals;
+using var_9.Serializer;
 
 namespace var_9
 {
@@ -1047,10 +1048,16 @@ namespace var_9
         {
             Console.Clear();
             var serializer = new ZooSerializer();
-            if (_zoo != null && serializer.SerializeZoo(_zoo))
-                Console.WriteLine("Зоопарк успешно сериализован в файл {0}", serializer.FileName);
-            else
+            try
+            {
+                serializer.SerializeZoo(_zoo);
+                Console.WriteLine("Зоопарк успешно сериализован в файл {0}", serializer.FileName);  
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
                 Console.WriteLine("Зоопарк не был сериализован");
+            }
             Console.WriteLine("------------------------------------------------");
             Console.WriteLine("Нажмите любую клавишу для возврата в меню...");
             Console.ReadKey();
@@ -1060,11 +1067,16 @@ namespace var_9
         {
             Console.Clear();
             var serializer = new ZooSerializer();
-            _zoo = serializer.DeserializeZoo();
-            if (_zoo != null)
+            try
+            {
+                _zoo = serializer.DeserializeZoo();
                 Console.WriteLine("Зоопарк успешно десериализован из файла {0}", serializer.FileName);
-            else
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
                 Console.WriteLine("Зоопарк не был десериализован");
+            }
             Console.WriteLine("------------------------------------------------");
             Console.WriteLine("Нажмите любую клавишу для возврата в меню...");
             Console.ReadKey();
