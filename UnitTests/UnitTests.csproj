@@ -63,7 +63,7 @@
     <Compile Include="Animals\TestFish.cs" />
     <Compile Include="Animals\TestMammal.cs" />
     <Compile Include="Animals\TestReptile.cs" />
-    <Compile Include="TestSerializer.cs" />
+    <Compile Include="TestZooSerializer.cs" />
     <Compile Include="TestZoo.cs" />
   </ItemGroup>
   <ItemGroup>

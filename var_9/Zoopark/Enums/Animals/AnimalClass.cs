@@ -1,8 +1,8 @@
-﻿using System;
+﻿//using System;
 
 namespace var_9.Zoopark.Enums.Animals
 {
-    [Serializable]
+    //[Serializable]
     public enum AnimalClass
     {
         Mammal=1,

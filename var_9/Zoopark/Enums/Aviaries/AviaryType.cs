@@ -1,8 +1,8 @@
-﻿using System;
+﻿//using System;
 
 namespace var_9.Zoopark.Enums.Aviaries
 {
-    [Serializable]
+    //[Serializable]
     public enum AviaryType
     {
         Cage=1,

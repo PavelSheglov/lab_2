@@ -12,7 +12,7 @@ using System.Linq;
 namespace UnitTests
 {
     [TestClass]
-    public class TestSerializer
+    public class TestZooSerializer
     {
         [TestMethod]
         public void TestSimpleConstructor()
