@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using GUI.Controller;
 
@@ -16,6 +9,7 @@ namespace GUI.Forms
         private ZooController _controller;
         private string _name;
         private string _address;
+
         public AddZooForm(ZooController controller)
         {
             _controller = controller;

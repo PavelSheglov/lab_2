@@ -45,7 +45,7 @@ namespace GUI.Forms
             }
         }
 
-        private void viewAnimalButton1_Click(object sender, EventArgs e)
+        private void viewAnimalButton_Click(object sender, EventArgs e)
         {
             if (animalsListBox.SelectedItem != null)
             {

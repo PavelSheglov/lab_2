@@ -32,7 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.addAnimalButton = new System.Windows.Forms.Button();
             this.deleteAnimalButton = new System.Windows.Forms.Button();
-            this.viewAnimalButton1 = new System.Windows.Forms.Button();
+            this.viewAnimalButton = new System.Windows.Forms.Button();
             this.transferAnimalButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -74,15 +74,15 @@
             this.deleteAnimalButton.UseVisualStyleBackColor = true;
             this.deleteAnimalButton.Click += new System.EventHandler(this.deleteAnimalButton_Click);
             // 
-            // viewAnimalButton1
+            // viewAnimalButton
             // 
-            this.viewAnimalButton1.Location = new System.Drawing.Point(415, 153);
-            this.viewAnimalButton1.Name = "viewAnimalButton1";
-            this.viewAnimalButton1.Size = new System.Drawing.Size(132, 37);
-            this.viewAnimalButton1.TabIndex = 4;
-            this.viewAnimalButton1.Text = "Информация";
-            this.viewAnimalButton1.UseVisualStyleBackColor = true;
-            this.viewAnimalButton1.Click += new System.EventHandler(this.viewAnimalButton1_Click);
+            this.viewAnimalButton.Location = new System.Drawing.Point(415, 153);
+            this.viewAnimalButton.Name = "viewAnimalButton";
+            this.viewAnimalButton.Size = new System.Drawing.Size(132, 37);
+            this.viewAnimalButton.TabIndex = 4;
+            this.viewAnimalButton.Text = "Информация";
+            this.viewAnimalButton.UseVisualStyleBackColor = true;
+            this.viewAnimalButton.Click += new System.EventHandler(this.viewAnimalButton_Click);
             // 
             // transferAnimalButton
             // 
@@ -100,7 +100,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 263);
             this.Controls.Add(this.transferAnimalButton);
-            this.Controls.Add(this.viewAnimalButton1);
+            this.Controls.Add(this.viewAnimalButton);
             this.Controls.Add(this.deleteAnimalButton);
             this.Controls.Add(this.addAnimalButton);
             this.Controls.Add(this.label1);
@@ -121,7 +121,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button addAnimalButton;
         private System.Windows.Forms.Button deleteAnimalButton;
-        private System.Windows.Forms.Button viewAnimalButton1;
+        private System.Windows.Forms.Button viewAnimalButton;
         private System.Windows.Forms.Button transferAnimalButton;
     }
 }
